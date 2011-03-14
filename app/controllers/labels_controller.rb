@@ -47,12 +47,14 @@ class LabelsController < ApplicationController
     label_error = false
     
     addresses.each do |l|
-      label = Label.new(:address => l)
-      if label.valid?
-        labels << label
-      else
-        label_error = true
-      end 
+      unless l.blank?
+        label = Label.new(:address => l)
+        if label.valid?
+          labels << label
+        else
+          label_error = true
+        end 
+      end
     end
     
     labels.each do |s|
